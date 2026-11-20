@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mueblería Cochabamba · Muebles para tu hogar y oficina</title>
+<meta name="description" content="Mueblería Cochabamba: catálogo de muebles con precios y disponibilidad, asistente virtual y solicitud de cotización en línea." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --crema:#F7F2EA; --papel:#FFFDF9; --tinta:#2A211A; --suave:#6B5D52;
+    --madera:#8A5A3B; --terracota:#B5562F; --terracota-osc:#93421F;
+    --oliva:#4F6B3A; --ambar:#B7791F; --rojo:#A23B2A; --linea:#E6DCCD;
+    --radio:14px; --sombra:0 1px 2px rgba(42,33,26,.06),0 8px 24px rgba(42,33,26,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"DM Sans",system-ui,sans-serif;background:var(--crema);color:var(--tinta);line-height:1.55;font-size:16px}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:700;line-height:1.15;letter-spacing:-.01em}
+  a{color:inherit}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+
+  /* Barra superior */
+  header.top{position:sticky;top:0;z-index:20;background:rgba(247,242,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:"Fraunces",serif;font-weight:700;font-size:1.2rem}
+  .logo svg{width:34px;height:34px}
+  nav.menu a{text-decoration:none;margin-left:24px;font-weight:500;color:var(--suave)}
+  nav.menu a:hover{color:var(--terracota)}
+  .carrito-link{position:relative}
+  .contador{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--terracota);color:#fff;font-size:.75rem;font-weight:700;margin-left:6px}
+
+  /* Portada */
+  .hero{padding:72px 0 56px;border-bottom:1px solid var(--linea);background:
+    radial-gradient(1200px 400px at 85% -10%,rgba(181,86,47,.12),transparent 60%),
+    repeating-linear-gradient(90deg,rgba(138,90,59,.035) 0 2px,transparent 2px 46px)}
+  .hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:48px;align-items:center}
+  .eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:14px}
+  .hero h1{font-size:clamp(2.2rem,4.6vw,3.6rem)}
+  .hero h1 em{font-style:normal;color:var(--terracota)}
+  .hero p.lead{font-size:1.12rem;color:var(--suave);margin:18px 0 28px;max-width:560px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:inherit;font-weight:700;padding:13px 22px;border-radius:999px;text-decoration:none;transition:transform .15s,background .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-pri{background:var(--terracota);color:#fff}
+  .btn-pri:hover{background:var(--terracota-osc)}
+  .btn-sec{background:transparent;color:var(--tinta);border:1.5px solid var(--tinta)}
+  .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+  .datos{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap}
+  .dato b{display:block;font-family:"Fraunces",serif;font-size:1.5rem}
+  .dato span{font-size:.88rem;color:var(--suave)}
+  .tarjeta-chat{background:var(--papel);border:1px solid var(--linea);border-radius:20px;padding:22px;box-shadow:var(--sombra)}
+  .tarjeta-chat .cab{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .avatar{width:40px;height:40px;border-radius:50%;background:var(--terracota);color:#fff;display:grid;place-items:center;font-family:"Fraunces",serif;font-weight:700}
+  .tarjeta-chat .cab small{display:block;color:var(--oliva);font-size:.8rem}
+  .msg{padding:10px 14px;border-radius:14px;margin:8px 0;font-size:.93rem;max-width:88%}
+  .msg.u{background:var(--tinta);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+  .msg.b{background:#F1E9DD;border-bottom-left-radius:4px}
+  .tarjeta-chat .pie{margin-top:14px;font-size:.85rem;color:var(--suave);display:flex;align-items:center;gap:8px}
+
+  section{padding:64px 0}
+  .titulo-sec{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+  .titulo-sec h2{font-size:clamp(1.7rem,3vw,2.3rem)}
+  .titulo-sec p{color:var(--suave);max-width:520px}
+
+  /* Filtros */
+  .filtros{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);padding:16px;margin-bottom:12px}
+  .campo label{display:block;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--suave);margin-bottom:6px}
+  .campo input,.campo select,.campo textarea{width:100%;font:inherit;padding:10px 12px;border:1.5px solid var(--linea);border-radius:10px;background:#fff;color:var(--tinta)}
+  .campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--terracota)}
+  .filtros .acciones{display:flex;align-items:end}
+  .filtros .acciones .btn{width:100%;justify-content:center;padding:11px}
+  .estado-inv{font-size:.88rem;color:var(--suave);margin-bottom:22px;min-height:1.4em}
+
+  /* Catálogo */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+  .prod{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sombra);transition:transform .2s}
+  .prod:hover{transform:translateY(-3px)}
+  .img-ref{aspect-ratio:4/3;display:grid;place-items:center;text-align:center;color:var(--madera);
+    background:repeating-linear-gradient(135deg,#EFE4D4 0 12px,#F5ECDF 12px 24px);border-bottom:1px solid var(--linea);padding:10px}
+  .img-ref svg{width:56px;height:56px;opacity:.75}
+  .img-ref small{display:block;font-size:.72rem;margin-top:6px;font-weight:500;letter-spacing:.02em}
+  .prod .cuerpo{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .cod{font-size:.75rem;font-weight:700;color:var(--terracota);letter-spacing:.08em}
+  .prod h3{font-size:1.15rem}
+  .specs{font-size:.88rem;color:var(--suave)}
+  .precio{font-family:"Fraunces",serif;font-size:1.45rem;font-weight:700;margin-top:4px}
+  .stock{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700}
+  .stock::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+  .stock.ok{color:var(--oliva)} .stock.poco{color:var(--ambar)} .stock.no{color:var(--rojo)}
+  .prod .btn{margin-top:auto;justify-content:center;padding:10px;font-size:.92rem}
+  .prod .btn.en{background:var(--oliva)}
+  .vacio,.error,.cargando{grid-column:1/-1;text-align:center;padding:40px;background:var(--papel);border:1px dashed var(--linea);border-radius:var(--radio);color:var(--suave)}
+  .esq{background:linear-gradient(90deg,#EFE6D9,#F7F0E6,#EFE6D9);background-size:200% 100%;animation:brillo 1.2s infinite;border-radius:var(--radio);height:360px}
+  @keyframes brillo{to{background-position:-200% 0}}
+
+  /* Cotización */
+  #cotizacion{background:var(--papel);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+  .cot{display:grid;grid-template-columns:1.1fr 1fr;gap:36px}
+  .lista-cot{border:1px solid var(--linea);border-radius:var(--radio);overflow:hidden}
+  .item{display:grid;grid-template-columns:1fr 90px 110px 32px;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--linea)}
+  .item:last-child{border-bottom:0}
+  .item small{display:block;color:var(--suave);font-size:.8rem}
+  .item input{width:100%;font:inherit;padding:6px 8px;border:1.5px solid var(--linea);border-radius:8px;text-align:center}
+  .item .sub{text-align:right;font-weight:700}
+  .quitar{border:0;background:none;cursor:pointer;color:var(--suave);font-size:1.2rem}
+  .aviso-stock{grid-column:1/-1;font-size:.8rem;color:var(--ambar);margin-top:-4px}
+  .totales{padding:14px;background:#FBF6EF;font-size:.92rem}
+  .totales div{display:flex;justify-content:space-between;margin:3px 0}
+  .totales .t{font-weight:700;font-size:1.05rem;border-top:1px solid var(--linea);padding-top:8px;margin-top:8px}
+  .nota{font-size:.82rem;color:var(--suave);margin-top:10px}
+  form.datos-cli{display:grid;gap:14px}
+  .dos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:.9rem}
+  .check input{margin-top:4px;accent-color:var(--terracota)}
+  .resultado{padding:16px;border-radius:12px;font-size:.95rem;display:none}
+  .resultado.ok{display:block;background:#EAF1E3;border:1px solid #C5D8B4}
+  .resultado.mal{display:block;background:#F8E6E1;border:1px solid #E8BFB4}
+  .resultado b.id{font-family:"Fraunces",serif;font-size:1.3rem;display:block;margin:4px 0}
+
+  /* Cómo funciona */
+  .pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .paso{background:var(--papel);border:1px solid var(--linea);border-radius:var(--radio);padding:22px}
+  .paso .n{font-family:"Fraunces",serif;font-size:2rem;color:var(--terracota);font-weight:700}
+  .paso h3{font-size:1.1rem;margin:4px 0 6px}
+  .paso p{color:var(--suave);font-size:.93rem}
+
+  footer{background:var(--tinta);color:#E9DFD2;padding:40px 0 30px;font-size:.9rem}
+  footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+  footer h4{font-family:"Fraunces",serif;font-size:1.05rem;margin-bottom:8px;color:#fff}
+  footer .legal{grid-column:1/-1;border-top:1px solid #4A3E34;padding-top:16px;font-size:.8rem;color:#B9AB9C}
+
+  @media (max-width:900px){
+    .hero .wrap,.cot{grid-template-columns:1fr}
+    .filtros{grid-template-columns:1fr 1fr}
+    .pasos{grid-template-columns:1fr}
+    footer .wrap{grid-template-columns:1fr}
+    nav.menu a:not(.carrito-link){display:none}
+  }
+  @media (max-width:520px){
+    .filtros,.dos{grid-template-columns:1fr}
+    .item{grid-template-columns:1fr 70px 32px}
+    .item .sub{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Mueblería Cochabamba, inicio">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#B5562F"/><path d="M9 25h22v4H9zM11 17h18v8H11zM12 29v4M28 29v4" stroke="#FFFDF9" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+      Mueblería Cochabamba
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#cotizacion" class="carrito-link">Cotización<span class="contador" id="contador">0</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Desde 2010 en Cochabamba</span>
+        <h1>Muebles que <em>sí entran</em> en tu espacio y en tu presupuesto.</h1>
+        <p class="lead">Explora el catálogo con precios autorizados y disponibilidad actualizada, conversa con Arce, nuestro asistente virtual, y pide tu cotización en minutos.</p>
+        <div class="btns">
+          <a class="btn btn-pri" href="#catalogo">Ver catálogo</a>
+          <a class="btn btn-sec" href="#cotizacion">Pedir cotización</a>
+        </div>
+        <div class="datos">
+          <div class="dato"><b>+15 años</b><span>atendiendo hogares y oficinas</span></div>
+          <div class="dato"><b>Bs 100</b><span>transporte local en Cochabamba</span></div>
+          <div class="dato"><b>Junto a la terminal</b><span>de buses de Cochabamba</span></div>
+        </div>
+      </div>
+      <aside class="tarjeta-chat" aria-label="Ejemplo de conversación con el asistente">
+        <div class="cab"><div class="avatar">A</div><div><b>Arce</b><small>● Asistente virtual en línea</small></div></div>
+        <div class="msg u">Busco un escritorio para un espacio de 110 cm. Tengo Bs 900.</div>
+        <div class="msg b">Te recomiendo el <b>M04 · Escritorio compacto</b>: 100 × 55 × 75 cm, melamina, Bs 850. ¿Quieres que lo cotice?</div>
+        <div class="pie">💬 Abre el chat con el botón de la esquina inferior derecha.</div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="catalogo">
+    <div class="wrap">
+      <div class="titulo-sec">
+        <h2>Catálogo</h2>
+        <p>Precios autorizados en bolivianos. La disponibilidad se lee en vivo del inventario de la tienda.</p>
+      </div>
+      <form class="filtros" id="filtros" onsubmit="event.preventDefault();cargarCatalogo()">
+        <div class="campo"><label for="fCat">Categoría</label>
+          <select id="fCat"><option value="">Todas</option></select></div>
+        <div class="campo"><label for="fAncho">Ancho máximo (cm)</label>
+          <input id="fAncho" type="number" min="1" placeholder="Ej. 110" /></div>
+        <div class="campo"><label for="fPres">Presupuesto máximo (Bs)</label>
+          <input id="fPres" type="number" min="1" placeholder="Ej. 900" /></div>
+        <div class="acciones"><button class="btn btn-pri" type="submit">Buscar</button></div>
+      </form>
+      <p class="estado-inv" id="estadoInv"></p>
+      <div class="grid" id="grid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="cotizacion">
+    <div class="wrap">
+      <div class="titulo-sec">
+        <h2>Solicitud de cotización</h2>
+        <p>Elige productos del catálogo, ajusta las cantidades y déjanos tu correo. Un vendedor te enviará la proforma.</p>
+      </div>
+      <div class="cot">
+        <div>
+          <div class="lista-cot" id="listaCot"></div>
+          <div class="nota">Importes referenciales con precios vigentes. La solicitud <b>no es una venta ni reserva stock</b>; descuentos especiales y entregas fuera de Cochabamba los confirma un vendedor.</div>
+        </div>
+        <form class="datos-cli" id="formCot" novalidate>
+          <div class="campo"><label for="nombre">Nombre completo</label><input id="nombre" required autocomplete="name" /></div>
+          <div class="dos">
+            <div class="campo"><label for="correo">Correo</label><input id="correo" type="email" required autocomplete="email" /></div>
+            <div class="campo"><label for="correo2">Confirma tu correo</label><input id="correo2" type="email" required autocomplete="off" /></div>
+          </div>
+          <div class="campo"><label for="obs">Observaciones (opcional)</label><textarea id="obs" rows="3" placeholder="Ej. color preferido, piso de entrega, horario…"></textarea></div>
+          <label class="check"><input type="checkbox" id="acepto" /> Confirmo que mi correo es correcto y acepto que Mueblería Cochabamba me contacte solo para esta cotización.</label>
+          <button class="btn btn-pri" type="submit" id="btnEnviar">Enviar solicitud</button>
+          <div class="resultado" id="resultado" role="status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="como">
+    <div class="wrap">
+      <div class="titulo-sec"><h2>¿Cómo funciona?</h2></div>
+      <div class="pasos">
+        <div class="paso"><div class="n">1</div><h3>Cuéntanos qué necesitas</h3><p>Escríbele a Arce las medidas del espacio, tu presupuesto o el mueble que buscas. Te hará solo las preguntas necesarias.</p></div>
+        <div class="paso"><div class="n">2</div><h3>Recibe opciones reales</h3><p>Arce consulta el catálogo y el inventario actualizado: solo recomienda muebles que existen, que entran en tu espacio y en tu presupuesto.</p></div>
+        <div class="paso"><div class="n">3</div><h3>Pide tu cotización</h3><p>Desde el chat o con el formulario. Recibes un número de solicitud y un vendedor te envía la proforma a tu correo.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><h4>Mueblería Cochabamba</h4><p>Fundada en 2010 por la familia Arce. Muebles para el hogar y la oficina, cerca de la terminal de buses de Cochabamba, Bolivia.</p></div>
+    <div><h4>Atención</h4><p>Asistente virtual 24/7 en el chat.<br>Reclamos y negociaciones: un vendedor te contactará.</p></div>
+    <div><h4>Entregas</h4><p>Transporte local dentro de Cochabamba: Bs 100.<br>Otras ciudades: a coordinar con un vendedor.</p></div>
+    <p class="legal">Prototipo académico – Diplomado en Agentes de IA (UPB), Proyecto final Módulo 1. Datos de muestra ficticios; las imágenes son marcadores referenciales hasta contar con fotografías autorizadas.</p>
+  </div>
+</footer>
+
+<script>
+  // ======= Configuración =======
+  const API_URL = "https://script.google.com/macros/s/AKfycbyw75LedWHgfKquAWGYnrT3XUqAVx6gJ0-xVSYE2BaSK3lrEv5YmuFxxsJ1xu2ysPM2/exec";
+  const TRANSPORTE_LOCAL = 100;
+
+  // ======= Estado =======
+  let productos = [];               // último resultado del catálogo
+  const catalogoCompleto = {};      // código -> producto (para la cotización)
+  let carrito = [];                 // [{codigo, cantidad}]
+  let idEnvio = nuevoId();          // evita solicitudes duplicadas si se reintenta
+
+  const $ = s => document.querySelector(s);
+  const bs = n => "Bs " + Number(n).toLocaleString("es-BO", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+  function nuevoId(){ return "web-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8); }
+
+  const ICONO = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 34h44v10H10zM14 24h36v10H14zM14 44v8M50 44v8M18 24v-6a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v6"/></svg>`;
+
+  async function api(params){
+    const url = API_URL + "?" + new URLSearchParams(params).toString();
+    const r = await fetch(url, { method: "GET", redirect: "follow" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  }
+
+  // ======= Catálogo =======
+  async function cargarCatalogo(){
+    const grid = $("#grid");
+    grid.innerHTML = '<div class="esq"></div><div class="esq"></div><div class="esq"></div>';
+    $("#estadoInv").textContent = "Consultando inventario…";
+    const params = { accion: "catalogo" };
+    if ($("#fCat").value) params.categoria = $("#fCat").value;
+    if ($("#fAncho").value) params.anchoMax = $("#fAncho").value;
+    if ($("#fPres").value) params.presupuestoMax = $("#fPres").value;
+    try {
+      const data = await api(params);
+      if (!data.ok) throw new Error(data.error || "Respuesta no válida");
+      productos = data.productos || [];
+      productos.forEach(p => catalogoCompleto[p.codigo] = p);
+      llenarCategorias();
+      $("#estadoInv").innerHTML = `Disponibilidad al <b>${esc(data.fecha_inventario)}</b> · ${productos.length} producto(s)`;
+      pintarCatalogo();
+      pintarCotizacion();
+    } catch (e) {
+      $("#estadoInv").textContent = "";
+      grid.innerHTML = `<div class="error">No pudimos consultar el catálogo en este momento (${esc(e.message)}).<br><br>
+        <button class="btn btn-sec" onclick="cargarCatalogo()">Reintentar</button></div>`;
+    }
+  }
+
+  function llenarCategorias(){
+    const sel = $("#fCat");
+    if (sel.options.length > 1) return;
+    [...new Set(productos.map(p => p.categoria))].sort().forEach(c => sel.add(new Option(c, c)));
+  }
+
+  function etiquetaStock(d){
+    if (d <= 0) return '<span class="stock no">Sin stock · entrega por confirmar</span>';
+    if (d === 1) return '<span class="stock poco">Última unidad</span>';
+    if (d <= 2) return `<span class="stock poco">Últimas ${d} unidades</span>`;
+    return `<span class="stock ok">${d} disponibles</span>`;
+  }
+
+  function pintarCatalogo(){
+    const grid = $("#grid");
+    if (!productos.length){
+      grid.innerHTML = '<div class="vacio">No hay productos que cumplan esos filtros. Prueba con otras medidas o presupuesto, o pregúntale a Arce en el chat.</div>';
+      return;
+    }
+    grid.innerHTML = productos.map(p => {
+      const en = carrito.some(i => i.codigo === p.codigo);
+      return `<article class="prod">
+        <div class="img-ref">${ICONO}<small>Imagen referencial pendiente · ${esc(p.codigo)}</small></div>
+        <div class="cuerpo">
+          <span class="cod">${esc(p.codigo)} · ${esc(p.categoria)}</span>
+          <h3>${esc(p.producto)}</h3>
+          <div class="specs">${esc(p.ancho_cm)} × ${esc(p.profundidad_cm)} × ${esc(p.alto_cm)} cm (an × prof × alto)<br>${esc(p.material)} · ${esc(p.uso)}</div>
+          <div class="precio">${bs(p.precio_bs)}</div>
+          ${etiquetaStock(Number(p.disponible))}
+          <button class="btn btn-pri ${en ? "en" : ""}" onclick="agregar('${esc(p.codigo)}')">${en ? "✓ En la cotización" : "Añadir a cotización"}</button>
+        </div>
+      </article>`;
+    }).join("");
+  }
+
+  // ======= Cotización =======
+  function agregar(codigo){
+    const it = carrito.find(i => i.codigo === codigo);
+    if (it) it.cantidad++; else carrito.push({ codigo, cantidad: 1 });
+    pintarCatalogo(); pintarCotizacion();
+  }
+  function quitar(codigo){ carrito = carrito.filter(i => i.codigo !== codigo); pintarCatalogo(); pintarCotizacion(); }
+  function cambiarCant(codigo, v){
+    const n = parseInt(v, 10);
+    const it = carrito.find(i => i.codigo === codigo);
+    if (it) it.cantidad = Number.isInteger(n) && n > 0 ? n : 1;
+    pintarCotizacion();
+  }
+
+  function pintarCotizacion(){
+    $("#contador").textContent = carrito.reduce((s, i) => s + i.cantidad, 0);
+    const cont = $("#listaCot");
+    if (!carrito.length){
+      cont.innerHTML = '<div class="vacio" style="border:0">Aún no elegiste productos. Usa “Añadir a cotización” en el catálogo.</div>';
+      return;
+    }
+    let subtotal = 0;
+    const filas = carrito.map(i => {
+      const p = catalogoCompleto[i.codigo] || {};
+      const sub = (Number(p.precio_bs) || 0) * i.cantidad; subtotal += sub;
+      const falta = i.cantidad - (Number(p.disponible) || 0);
+      return `<div class="item">
+        <div><b>${esc(i.codigo)}</b> · ${esc(p.producto || "")}<small>${bs(p.precio_bs || 0)} c/u</small></div>
+        <input type="number" min="1" step="1" value="${i.cantidad}" aria-label="Cantidad ${esc(i.codigo)}" onchange="cambiarCant('${esc(i.codigo)}', this.value)" />
+        <div class="sub">${bs(sub)}</div>
+        <button class="quitar" type="button" title="Quitar" aria-label="Quitar ${esc(i.codigo)}" onclick="quitar('${esc(i.codigo)}')">×</button>
+        ${falta > 0 ? `<div class="aviso-stock">Solo hay ${Math.max(0, i.cantidad - falta)} disponible(s): ${falta} unidad(es) requieren reposición y la entrega queda por confirmar.</div>` : ""}
+      </div>`;
+    }).join("");
+    cont.innerHTML = filas + `<div class="totales">
+      <div><span>Subtotal</span><span>${bs(subtotal)}</span></div>
+      <div><span>Transporte local (Cochabamba)</span><span>${bs(TRANSPORTE_LOCAL)}</span></div>
+      <div class="t"><span>Total referencial</span><span>${bs(subtotal + TRANSPORTE_LOCAL)}</span></div>
+    </div>`;
+  }
+
+  $("#formCot").addEventListener("submit", async e => {
+    e.preventDefault();
+    const res = $("#resultado");
+    const nombre = $("#nombre").value.trim(), correo = $("#correo").value.trim();
+    const errores = [];
+    if (!carrito.length) errores.push("Añade al menos un producto del catálogo.");
+    if (!nombre) errores.push("Escribe tu nombre.");
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) errores.push("Escribe un correo válido.");
+    if (correo.toLowerCase() !== $("#correo2").value.trim().toLowerCase()) errores.push("Los correos no coinciden.");
+    if (!$("#acepto").checked) errores.push("Confirma que tu correo es correcto.");
+    if (errores.length){ res.className = "resultado mal"; res.innerHTML = errores.join("<br>"); return; }
+
+    const btn = $("#btnEnviar"); btn.disabled = true; btn.textContent = "Enviando…";
+    try {
+      const data = await api({
+        accion: "registrar", id_conversacion: idEnvio, nombre, correo, correo_confirmado: "si",
+        productos: carrito.map(i => `${i.codigo}x${i.cantidad}`).join(", "),
+        observaciones: $("#obs").value.trim()
+      });
+      if (!data.ok) throw new Error(data.error);
+      res.className = "resultado ok";
+      res.innerHTML = `¡Solicitud registrada!<b class="id">${esc(data.id_solicitud)}</b>
+        Un vendedor te enviará la proforma a <b>${esc(correo)}</b>. Guarda este número para cualquier consulta.`;
+      carrito = []; idEnvio = nuevoId(); $("#formCot").reset();
+      pintarCatalogo(); pintarCotizacion();
+    } catch (err) {
+      res.className = "resultado mal";
+      res.textContent = "No se pudo registrar la solicitud: " + err.message + ". Intenta de nuevo o escríbele a Arce en el chat.";
+    } finally {
+      btn.disabled = false; btn.textContent = "Enviar solicitud";
+    }
+  });
+
+  pintarCotizacion();
+  cargarCatalogo();
+</script>
+
+<!-- ======= Asistente virtual (Botpress Webchat) ======= -->
+<link rel="stylesheet" href="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.css" />
+<script src="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.js"></script>
+<script>
+  fetch("https://vdk-viber-runtime-prod.bot.botpress.host/edge/bots/d5d2919b-da75-4f34-9313-7b5c53b4f08e/config")
+    .then((res) => res.json())
+    .then(({ webchat }) =>
+      VdkEdgeWebchat.mount({ ...webchat, mode: "bubble", baseUrl: "https://vdk-viber-runtime-prod.bot.botpress.host", botId: "d5d2919b-da75-4f34-9313-7b5c53b4f08e" })
+    )
+    .catch((e) => console.warn("No se pudo cargar el chat:", e));
+</script>
+</body>
+</html>
